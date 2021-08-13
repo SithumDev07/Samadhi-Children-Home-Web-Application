@@ -339,11 +339,11 @@ if (!isset($_SESSION['sessionId'])) {
                                 <label for="gender" name="gender" class="gender label-align">Gender</label>
                                 <div class="radio-wrapper">
                                     <div class="male mr-3">
-                                        <input type="radio" name="gender">
+                                        <input type="radio" name="gender" value="male">
                                         <label for="gender" name="gender">Male</label>
                                     </div>
                                     <div class="female">
-                                        <input type="radio" name="gender">
+                                        <input type="radio" name="gender" value="female">
                                         <label for="gender" name="gender">Female</label>
                                     </div>
                                 </div>
