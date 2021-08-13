@@ -1,0 +1,42 @@
+
+aside ul {
+    margin-left: 20px;
+    margin-top: 15px;
+    height: 0;
+    overflow: hidden;
+    transition: height 0.6s ease;
+}
+
+aside ul li {
+   list-style: none;
+   margin-top: 10px;
+}
+
+aside ul li a{
+    color: #ddd;
+    transition: color 0.6s ease;
+}
+
+aside ul li a:hover{
+    color: #fff;
+}
+
+aside > a > i, aside > a > h2 {
+   margin-right: 5px;
+}
+
+.menu-active{
+    height: 70px;
+    /* background-color: yellowgreen; */
+    overflow: hidden;
+}
+
+.menu-active-labors{
+    height: 120px;
+    overflow: hidden;
+}
+
+.active-link{
+    background-color: #000;
+    color: #fff;
+}
