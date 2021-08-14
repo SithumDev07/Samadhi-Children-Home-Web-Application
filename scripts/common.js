@@ -35,6 +35,9 @@ function setTrueOrFalse(value, variable) {
             case 'fullname':
                 isFocusedFullName = value;
                 break;
+            case 'donarname':
+                isFocusedDonarName = value;
+                break;
             default:
                 throw new Error(`Invalid varible name: ${variable}`);
         }
@@ -65,6 +68,8 @@ function getTrueOrFalse(container) {
             return isFocusedInitials;
         case 'fullname':
             return isFocusedFullName;
+        case 'donarname':
+            return isFocusedDonarName;
         default:
             throw new Error(`Invalid varible name: ${container}`);
     }

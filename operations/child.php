@@ -51,10 +51,6 @@ if (isset($_POST['insert'])) {
                         exit();
                     }
                 }
-
-
-                // header("Location: ../index.php?overview");
-                // exit();
             } else {
                 echo "File is too large.";
             }

@@ -34,10 +34,12 @@ if(initialName !== null && fullName !== null) {
     EventListener(fullName, 'fullname', isFocusedFullName);
 }
 
-if(insertChild.addEventListener) {
-    insertChild.addEventListener('click', returnToPrevious);
-} else {
-    insertChild.attachEvent('onclick', returnToPrevious);
+if(insertChild !== null) {
+    if(insertChild.addEventListener) {
+        insertChild.addEventListener('click', returnToPrevious);
+    } else {
+        insertChild.attachEvent('onclick', returnToPrevious);
+    }
 }
 
 function returnToPrevious (e) {

@@ -369,28 +369,32 @@ if (!isset($_SESSION['sessionId'])) {
                         </div>
 
                         <!-- <form onsubmit="return validate(this);"> -->
-                        <form class="max-width-form mx-auto border">
+                        <form class="max-width-form mx-auto border" action="./operations/donar.php" method="POST">
                             <div class="name content">
                                 <label for="Name" class="label-align">Donar Name</label>
-                                <input type="text" name="Name" placeholder="Enter Your Name" id="InitialName" class="select">
+                                <input class="border" type="text" name="donarName" placeholder="Enter Your Name" id="donarName" class="select">
                             </div>
                             <div class="fullName content">
                                 <label for="fullName" class="label-align">Contact Number</label>
-                                <input type="number" name="fullName" placeholder="Enter Contact Number" id="fullName">
+                                <input class="border" type="number" name="donarPhone" placeholder="Enter Contact Number" id="donarContactNumber">
                             </div>
                             <div class="PermanentAddress content">
-                                <label for="PermanentAddress" class="label-align">Permanent Address</label>
-                                <textarea name="name"></textarea>
+                                <label for="donarAddress" class="label-align">Permanent Address</label>
+                                <textarea class="border" name="donarAddress" id="donarAddress"></textarea>
                             </div>
                             <div class="POST content">
                                 <label for="POST" class="label-align">Donation Type</label>
-                                <select id="post" name="post" class="postSelect">
-                                    <option value="admin">Cash</option>
-                                    <option value="principal">Items</option>
-                                    <option value="matron">Both</option>
+                                <select id="donationType" name="donationType" class="postSelect">
+                                    <option value="cash">Cash</option>
+                                    <option value="items">Items</option>
+                                    <option value="both">Both</option>
                                 </select>
                             </div>
-                            <input name="insert" value="Insert" class="content" id="submit" type="submit">
+                            <div class="content">
+                                <label for="donations" class="label-align">Amount</label>
+                                <input class="border" type="number" name="donarAmount" placeholder="Enter Donate Amount" id="DonarAmount">
+                            </div>
+                            <input name="insert" value="Insert" class="content" id="submitDonar" type="submit">
 
                         </form>
                     </div>
@@ -546,6 +550,7 @@ if (!isset($_SESSION['sessionId'])) {
     </main>
     <script src="./scripts/common.js"></script>
     <script src="./scripts/addChild.js"></script>
+    <script src="./scripts/addDonations.js"></script>
     <script>
         const Donations = document.querySelector('#Donations');
         const Staff = document.querySelector('#Staff');
