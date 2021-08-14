@@ -4,6 +4,10 @@ const initialName = document.querySelector('#InitialName');
 const fullName = document.querySelector('#fullName');
 const birthday = document.querySelector('#birthdate');
 const insertChild = document.querySelector('#submitChild')
+const childImage = document.querySelector('#insertChildImage')
+
+
+
 
 let isFocusedInitials = false;
 let isFocusedFullName = false;
@@ -39,10 +43,10 @@ if(insertChild.addEventListener) {
 function returnToPrevious (e) {
     e = e || window.event;
 
-    if(!checkChildInputs()) {
+    // if(!checkChildInputs()) {
 
         
-    // if(true) {
+    if(true) {
         if(e.preventDefault) {
             e.preventDefault();
         } else {
@@ -50,7 +54,7 @@ function returnToPrevious (e) {
         }
     }
 
-    // console.log("Here I am " ,checkChildInputs());
+    console.log("Here I am " ,checkChildInputs());
     // checkChildInputs()
 
 }
@@ -59,7 +63,17 @@ function returnToPrevious (e) {
 function checkChildInputs() {
     var success = true;
 
-    // console.log(initialName.value + " Is empty");
+
+    // console.log(isValidImageSize(childImage));
+
+    if(!isValidExtention(childImage)) {
+        success = false;
+    }
+
+    if(!isValidImageSize(childImage)) {
+        success=false;
+    }
+
 
     if(emptyChecker(initialName)) {
         initialName.classList.add('border-red-500')
@@ -86,6 +100,11 @@ function checkChildInputs() {
         fullName.classList.remove('border-gray-400')
         success =  false;
     }
+
+    // console.log(isValidExtention(childImage));
+
+
+    
 
     
     // console.log(success);

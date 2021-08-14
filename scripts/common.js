@@ -164,41 +164,18 @@ function validate(input, container) {
 
 
 function validateForms(input, container) {
-    // console.log(container);
-    // if(!(container == 'password' || container == 'reentered' || container == 'address' || container == 'phone')) {
-        if(validateSpecialCharacters(input.value)) {
-            // setErros(
-            //     document.querySelector(`.${container}-wrapper`),
-            //     document.querySelector(`.error-message-${container}`),
-            //     'Special Characters not allowed!'
-            // );
+    if(validateSpecialCharacters(input.value)) {
             input.classList.remove('border-gray-400')
             input.classList.remove('border-green-500')
             input.classList.add('border-red-500')
-            // console.log('Special Characters Working');
         } else {
-            // setDefault(
-            //     document.querySelector(`.${container}-wrapper`),
-            //     document.querySelector(`.error-message-${container}`)
-            // );
             input.classList.remove('border-red-500')
             input.classList.add('border-gray-400')
         }
-    // } 
-    // else {
-    //     setDefault(
-    //         document.querySelector(`.${container}-wrapper`),
-    //         document.querySelector(`.error-message-${container}`)
-
-            
-    //     );
-    // }
-    
 }
 
 // Fields are empty validator
 function emptyChecker(Element) {
-    // console.log("Im triggering");
     return Element.value === '' ? true : false;
     
 }
@@ -207,3 +184,36 @@ function emptyChecker(Element) {
 function isMatch(first, second) {
     return first == second ? true : false;
 }
+
+function isValidExtention(file) {
+
+    var allowedFiles = [".jpg", ".jpeg", ".png", "png"];
+    var regex = new RegExp("([a-zA-Z0-9\s_\\.\-:])+(" + allowedFiles.join('|') + ")$");
+    if (!regex.test(file.value.toLowerCase())) {
+        alert("Please upload files having extensions: " + allowedFiles.join(', ') + " only.");
+        return false;
+    }
+    return true;
+}
+
+function isValidImageSize(file) {
+    if (file.files.length > 0) {
+        for (const i = 0; i <= file.files.length - 1; i++) {
+
+            const fsize = file.files.item(i).size;
+            const newFile = Math.round((fsize / 1024));
+            // The size of the file.
+            if (newFile >= 3072) {
+                alert(
+                  "File is too large, please select a file less than 3mb");
+                  return false;
+            } else if (newFile < 1024) {
+                alert(
+                  "File is too small, please select a file greater than 1mb");
+                  return false;
+            } 
+
+            return true;
+        }
+    }
+  }

@@ -350,7 +350,7 @@ if (!isset($_SESSION['sessionId'])) {
                             </div>
                             <div class="Image content">
                                 <label for="Image" class="label-align">Upload Image</label>
-                                <input type="file" name="Image" placeholder="Choose File">
+                                <input type="file" name="Image" placeholder="Choose File" id="insertChildImage">
                             </div>
                             <!-- <input type="submit" name="insert" value="Insert" class="content" id="submit"> -->
                             <input name="insert" value="Insert" class="content" id="submitChild" type="submit">
