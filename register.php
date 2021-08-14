@@ -56,7 +56,7 @@ require_once './includes/register-inc.php';
                                                                                     echo 'active-lable';
                                                                                 }
                                                                                 ?>">First Name</label>
-                    <input type="text" class="bg-transparent" name="firstname" id="firstname" value=" <?php if (isset($_GET['firstname'])) {
+                    <input type="text" class="bg-transparent" name="firstname" id="firstname" value="<?php if (isset($_GET['firstname'])) {
                                                                                                             echo $_GET['firstname'];
                                                                                                         }  ?>">
                 </div>
@@ -132,6 +132,7 @@ require_once './includes/register-inc.php';
             </form>
         </div>
     </main>
+    <script src="./scripts/common.js"></script>
     <script src="./scripts/register.js"></script>
 </body>
 

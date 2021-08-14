@@ -102,7 +102,7 @@ if (!isset($_SESSION['sessionId'])) {
                     <li><a href="#">View Labors</a></li>
                     <li><a href="#">View Labor Salary</a></li>
                 </ul>
-                <a href="#" class="flex items-center justify-start p-4">
+                <a href="./login.php" class="flex items-center justify-start p-4">
                     <i class="fas fa-power-off"></i>
                     <h2 class="ml-2">Log Out</h2>
                 </a>
