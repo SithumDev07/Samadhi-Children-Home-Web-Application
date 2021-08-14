@@ -1,3 +1,5 @@
+isRegister = false;
+
 const donarName = document.querySelector('#donarName');
 const donarContactNumber = document.querySelector('#donarContactNumber');
 const donarAddress = document.querySelector('#donarAddress');
@@ -10,7 +12,7 @@ const isFocusedDonarAddress = false;
 const isFocusedDonarAmount = false;
 
 if(donarName !== null) {
-    EventListener(donarName, 'donarname', isFocusedDonarName);
+    EventListener(donarName, 'donarname');
 }
 
 if(submitDonar !== null) {

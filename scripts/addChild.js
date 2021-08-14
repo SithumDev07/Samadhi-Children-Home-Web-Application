@@ -7,8 +7,6 @@ const insertChild = document.querySelector('#submitChild')
 const childImage = document.querySelector('#insertChildImage')
 
 
-
-
 let isFocusedInitials = false;
 let isFocusedFullName = false;
 
@@ -30,8 +28,8 @@ if(birthday !== null) {
 }
 
 if(initialName !== null && fullName !== null) {
-    EventListener(initialName, 'initials', isFocusedInitials);
-    EventListener(fullName, 'fullname', isFocusedFullName);
+    EventListener(initialName, 'initials');
+    EventListener(fullName, 'fullname');
 }
 
 if(insertChild !== null) {

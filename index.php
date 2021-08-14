@@ -257,46 +257,46 @@ if (!isset($_SESSION['sessionId'])) {
                         <form class="max-width-form mx-auto border">
                             <div class="firstname content">
                                 <label for="firstname" class="label-align">First Name</label>
-                                <input type="text" name="firstname" placeholder="First Name">
+                                <input class='border' type="text" name="firstname" placeholder="First Name" id="staffFirstname">
                             </div>
                             <div class="lastname content">
                                 <label for="lastname" class="label-align">Last Name</label>
-                                <input type="text" name="lastname" placeholder="Last Name">
+                                <input class='border' type="text" name="lastname" placeholder="Last Name" id="staffLastname">
                             </div>
                             <div class="name content">
                                 <label for="Name" class="label-align">Name with initials</label>
-                                <input type="text" name="Name" placeholder="Enter Name With Initials">
+                                <input class='border' type="text" name="Name" placeholder="Enter Name With Initials" id="staffInitials">
                             </div>
                             <div class="birthday content">
                                 <label for="birthday" class="label-align">Birthday</label>
-                                <input type="date" name="birthday" placeholder="Enter Full Name">
+                                <input class='border' type="date" name="birthday" placeholder="Enter Full Name" id="staffBirthday">
                             </div>
                             <div class="NIC content">
                                 <label for="NIC" class="label-align">NIC Number</label>
-                                <input type="text" name="NIC" placeholder="Enter NIC Number" maxlength="12">
+                                <input class='border' type="number" name="NIC" placeholder="Enter NIC Number" maxlength="12" id="staffNIC">
                             </div>
                             <div class="gender-wrapper content">
                                 <label for="gender" name="gender" class="gender label-align">Gender</label>
-                                <select id="cars" name="gender" class="genderSelect">
+                                <select id="staffGender" name="gender" class="genderSelect">
                                     <option value="male">Male</option>
                                     <option value="female">Female</option>
                                 </select>
                             </div>
                             <div class="ContactNumber content">
                                 <label for="ContactNumber" class="label-align">Contact Number</label>
-                                <input type="number" name="ContactNumber" placeholder="Enter Contact Number" maxlength="10">
+                                <input class='border' type="number" name="ContactNumber" placeholder="Enter Contact Number" maxlength="10" id="staffContact">
                             </div>
                             <div class="PermanentAddress content">
                                 <label for="PermanentAddress" class="label-align">Permanent Address</label>
-                                <textarea name="name"></textarea>
+                                <textarea class="border" name="name" id="staffAddress"></textarea>
                             </div>
                             <div class="Email content">
                                 <label for="Email" class="label-align">Email Address</label>
-                                <input type="email" name="Email" placeholder="Enter Email Address">
+                                <input class='border' type="email" name="Email" placeholder="Enter Email Address" id="staffEmail">
                             </div>
                             <div class="POST content">
                                 <label for="POST" class="label-align">POST</label>
-                                <select id="post" name="post" class="postSelect">
+                                <select id="staffPost" name="post" class="postSelect">
                                     <option value="admin">Admin</option>
                                     <option value="principal">Principal</option>
                                     <option value="matron">Matron</option>
@@ -304,9 +304,9 @@ if (!isset($_SESSION['sessionId'])) {
                             </div>
                             <div class="Image content">
                                 <label for="Image" class="label-align">Upload Image</label>
-                                <input type="file" name="Image" placeholder="Choose File">
+                                <input class='border' type="file" name="Image" placeholder="Choose File" id="staffImage">
                             </div>
-                            <input type="submit" name="insert" value="Insert" class="content">
+                            <input type="submit" name="insert" value="Insert" class="content" id="staffInsert">
 
                         </form>
                     </div>
@@ -551,6 +551,7 @@ if (!isset($_SESSION['sessionId'])) {
     <script src="./scripts/common.js"></script>
     <script src="./scripts/addChild.js"></script>
     <script src="./scripts/addDonations.js"></script>
+    <script src="./scripts/addStaff.js"></script>
     <script>
         const Donations = document.querySelector('#Donations');
         const Staff = document.querySelector('#Staff');

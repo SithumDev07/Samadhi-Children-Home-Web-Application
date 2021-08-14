@@ -99,7 +99,7 @@ function focusEventListener(Element, container, variable) {
 }
 
 //Labour, Staff, Child Event Lisener
-function EventListener(Element, container, variable) {
+function EventListener(Element, container) {
     Element.addEventListener('keyup', () => {
         // console.log(getTrueOrFalse(container));
         validateForms(Element, container);
@@ -169,7 +169,9 @@ function validate(input, container) {
 
 
 function validateForms(input, container) {
-    if(validateSpecialCharacters(input.value)) {
+    // console.log(input);
+    if(input.id !== 'staffEmail') {
+        if(validateSpecialCharacters(input.value)) {
             input.classList.remove('border-gray-400')
             input.classList.remove('border-green-500')
             input.classList.add('border-red-500')
@@ -177,6 +179,39 @@ function validateForms(input, container) {
             input.classList.remove('border-red-500')
             input.classList.add('border-gray-400')
         }
+    } else {
+        // var regEmail=/^([a-zA-Z0-9\._]+)@([a-zA-Z0-9])+.([a-z]+)(.[a-z]+)?$/;
+        // if(!regEmail.test(input.value)){
+        //     input.classList.remove('border-gray-400')
+        //     input.classList.remove('border-green-500')
+        //     input.classList.add('border-red-500')
+        //     console.log('invalid email');
+        // } else {
+        //     input.classList.remove('border-red-500')
+        //     input.classList.add('border-green-500')
+        //     console.log('Valid email');
+        // }
+
+        if(isValidEmail(input)) {
+            input.classList.remove('border-red-500')
+            input.classList.add('border-green-500')
+            console.log('Valid email');
+        } else {
+            input.classList.remove('border-gray-400')
+            input.classList.remove('border-green-500')
+            input.classList.add('border-red-500')
+            console.log('invalid email');
+        }
+    }
+}
+
+function isValidEmail(input) {
+    var regEmail=/^([a-zA-Z0-9\._]+)@([a-zA-Z0-9])+.([a-z]+)(.[a-z]+)?$/;
+    if(!regEmail.test(input.value)){
+        return false;
+    } else {
+        return true;
+    }
 }
 
 // Fields are empty validator
