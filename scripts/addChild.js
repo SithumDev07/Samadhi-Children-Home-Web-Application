@@ -43,10 +43,10 @@ if(insertChild.addEventListener) {
 function returnToPrevious (e) {
     e = e || window.event;
 
-    // if(!checkChildInputs()) {
+    if(!checkChildInputs()) {
 
         
-    if(true) {
+    // if(true) {
         if(e.preventDefault) {
             e.preventDefault();
         } else {
@@ -54,7 +54,7 @@ function returnToPrevious (e) {
         }
     }
 
-    console.log("Here I am " ,checkChildInputs());
+    // console.log("Here I am " ,checkChildInputs());
     // checkChildInputs()
 
 }
@@ -64,15 +64,18 @@ function checkChildInputs() {
     var success = true;
 
 
-    // console.log(isValidImageSize(childImage));
+    // console.log(childImage.files.length);
 
-    if(!isValidExtention(childImage)) {
-        success = false;
+    if(childImage.files.length !== 0) {
+        if(!isValidExtention(childImage)) {
+            success = false;
+        }
+    
+        if(!isValidImageSize(childImage)) {
+            success=false;
+        }
     }
-
-    if(!isValidImageSize(childImage)) {
-        success=false;
-    }
+    
 
 
     if(emptyChecker(initialName)) {
@@ -101,7 +104,6 @@ function checkChildInputs() {
         success =  false;
     }
 
-    // console.log(isValidExtention(childImage));
 
 
     

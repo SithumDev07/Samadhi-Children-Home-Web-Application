@@ -28,7 +28,7 @@ if (isset($_POST['insert'])) {
 
     if (in_array($fileActualExt, $allowed)) {
         if ($fileError === 0) {
-            if ($fileSize < 1000000) {
+            if ($fileSize < 3000000) {
                 $fileNameNew = uniqid('', true) . "." . $fileActualExt;
                 $fileDestination = '../photo_uploads/children/' . $fileNameNew;
                 move_uploaded_file($fileTmpName, $fileDestination);
