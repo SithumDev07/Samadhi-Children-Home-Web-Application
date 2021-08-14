@@ -324,11 +324,11 @@ if (!isset($_SESSION['sessionId'])) {
                         <form class="max-width-form mx-auto border" action="./operations/child.php" method="POST" enctype="multipart/form-data">
                             <div class="name content">
                                 <label for="Name" class="label-align">Name with initials</label>
-                                <input type="text" name="Name" placeholder="Enter Name With Initials" id="InitialName" class="select">
+                                <input type="text" name="Name" placeholder="Enter Name With Initials (Ex: B A S D Basnayake)" id="InitialName" class="select initials-wrapper border">
                             </div>
                             <div class="fullName content">
                                 <label for="fullName" class="label-align">Full Name</label>
-                                <input type="text" name="fullName" placeholder="Enter Full Name" id="fullName">
+                                <input type="text" name="fullName" placeholder="Enter Full Name" id="fullName" class="fullname-wrapper border">
                             </div>
                             <div class="birthday content">
                                 <label for="birthday" class="label-align">Birthday</label>
@@ -339,7 +339,7 @@ if (!isset($_SESSION['sessionId'])) {
                                 <label for="gender" name="gender" class="gender label-align">Gender</label>
                                 <div class="radio-wrapper">
                                     <div class="male mr-3">
-                                        <input type="radio" name="gender" value="male">
+                                        <input type="radio" name="gender" value="male" checked="checked">
                                         <label for="gender" name="gender">Male</label>
                                     </div>
                                     <div class="female">
@@ -353,7 +353,7 @@ if (!isset($_SESSION['sessionId'])) {
                                 <input type="file" name="Image" placeholder="Choose File">
                             </div>
                             <!-- <input type="submit" name="insert" value="Insert" class="content" id="submit"> -->
-                            <input name="insert" value="Insert" class="content" id="submit" type="submit">
+                            <input name="insert" value="Insert" class="content" id="submitChild" type="submit">
                             <!-- <input type="submit" name="insert" value="Insert" class="content"> -->
 
                         </form>
@@ -544,6 +544,8 @@ if (!isset($_SESSION['sessionId'])) {
             </div>
         </section>
     </main>
+    <script src="./scripts/common.js"></script>
+    <script src="./scripts/addChild.js"></script>
     <script>
         const Donations = document.querySelector('#Donations');
         const Staff = document.querySelector('#Staff');

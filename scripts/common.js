@@ -29,6 +29,12 @@ function setTrueOrFalse(value, variable) {
             case 'reentered':
                 isFocusedReentered = value;
                 break;
+            case 'initials':
+                isFocusedInitials = value;
+                break;
+            case 'fullname':
+                isFocusedFullName = value;
+                break;
             default:
                 throw new Error(`Invalid varible name: ${variable}`);
         }
@@ -55,8 +61,12 @@ function getTrueOrFalse(container) {
             return isFocusedPassword;
         case 'reentered':
             return isFocusedReentered;
+        case 'initials':
+            return isFocusedInitials;
+        case 'fullname':
+            return isFocusedFullName;
         default:
-            throw new Error(`Invalid varible name: ${variable}`);
+            throw new Error(`Invalid varible name: ${container}`);
     }
 }
 
@@ -80,6 +90,15 @@ function focusEventListener(Element, container, variable) {
         if(getTrueOrFalse(container))
         validate(Element, container);
         console.log(variable);
+    });
+}
+
+//Labour, Staff, Child Event Lisener
+function EventListener(Element, container, variable) {
+    Element.addEventListener('keyup', () => {
+        // console.log(getTrueOrFalse(container));
+        validateForms(Element, container);
+        // console.log(variable);
     });
 }
 
@@ -142,9 +161,46 @@ function validate(input, container) {
     
 }
 
+
+
+function validateForms(input, container) {
+    // console.log(container);
+    // if(!(container == 'password' || container == 'reentered' || container == 'address' || container == 'phone')) {
+        if(validateSpecialCharacters(input.value)) {
+            // setErros(
+            //     document.querySelector(`.${container}-wrapper`),
+            //     document.querySelector(`.error-message-${container}`),
+            //     'Special Characters not allowed!'
+            // );
+            input.classList.remove('border-gray-400')
+            input.classList.remove('border-green-500')
+            input.classList.add('border-red-500')
+            // console.log('Special Characters Working');
+        } else {
+            // setDefault(
+            //     document.querySelector(`.${container}-wrapper`),
+            //     document.querySelector(`.error-message-${container}`)
+            // );
+            input.classList.remove('border-red-500')
+            input.classList.add('border-gray-400')
+        }
+    // } 
+    // else {
+    //     setDefault(
+    //         document.querySelector(`.${container}-wrapper`),
+    //         document.querySelector(`.error-message-${container}`)
+
+            
+    //     );
+    // }
+    
+}
+
 // Fields are empty validator
 function emptyChecker(Element) {
+    // console.log("Im triggering");
     return Element.value === '' ? true : false;
+    
 }
 
 //Two fileds are identical validator

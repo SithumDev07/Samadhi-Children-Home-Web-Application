@@ -34,7 +34,7 @@ if (isset($_POST['submit'])) {
                     session_start();
                     $_SESSION['sessionId'] = $row['id'];
                     $_SESSION['sessionUser'] = $row['username'];
-                    header("Location: ../index.php?success=loggedin");
+                    header("Location: ../index.php?overview");
                     exit();
                 } else {
                     $location = "Location: ../login.php?error=wrong_pass&username=" . $username;
