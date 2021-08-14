@@ -83,6 +83,7 @@ require_once './includes/login-inc.php';
             </form>
         </div>
     </main>
+    <script src="./scripts/common.js"></script>
     <script src="./scripts/loginForm.js"></script>
 </body>
 

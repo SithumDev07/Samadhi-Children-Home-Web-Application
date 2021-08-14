@@ -1,4 +1,9 @@
 
+// State Selector for only run some functions only on isRegister.js
+let isRegister = true;
+
+
+
 // Setting the focus status of each input fields
 function setTrueOrFalse(value, variable) {
     if(value === true || value === false) {
@@ -91,6 +96,7 @@ function setErros(wrapper, errorEl, specificError = '') {
 
 // If error indicators are added then set them to default status
 function setDefault(wrapper, errorEl) {
+    // console.log(errorEl, wrapper);
     wrapper.classList.remove('border-red');
     wrapper.classList.add('border-yellow');
     errorEl.classList.add('hidden');
@@ -104,6 +110,7 @@ function validateSpecialCharacters(input) {
 
 //Main Validatot function
 function validate(input, container) {
+    // console.log(container);
     if(!(container == 'password' || container == 'reentered' || container == 'address' || container == 'phone')) {
         if(validateSpecialCharacters(input.value)) {
             setErros(
@@ -122,11 +129,15 @@ function validate(input, container) {
         setDefault(
             document.querySelector(`.${container}-wrapper`),
             document.querySelector(`.error-message-${container}`)
+
+            
         );
     }
 
-    if(container == 'username') {
-        document.querySelector('.already-taken').classList.add('hidden');
+    if(isRegister) {
+        if(container == 'username') {
+            document.querySelector('.already-taken').classList.add('hidden');
+        }
     }
     
 }
