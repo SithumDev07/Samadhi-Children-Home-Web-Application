@@ -56,6 +56,7 @@ function getTrueOrFalse(container) {
 }
 
 
+// Event lisener for focus, blur and keyup
 function focusEventListener(Element, container, variable) {
     Element.addEventListener('focus', () => {
       document.querySelector(`.floating-${container}`).classList.add('active-lable');
@@ -77,6 +78,7 @@ function focusEventListener(Element, container, variable) {
     });
 }
 
+// Specific Error setter for lables borders
 function setErros(wrapper, errorEl, specificError = '') {
     wrapper.classList.add('border-red');
     wrapper.classList.remove('border-yellow');
@@ -87,17 +89,20 @@ function setErros(wrapper, errorEl, specificError = '') {
     }
 }
 
+// If error indicators are added then set them to default status
 function setDefault(wrapper, errorEl) {
     wrapper.classList.remove('border-red');
     wrapper.classList.add('border-yellow');
     errorEl.classList.add('hidden');
 }
 
+// Special Character Validator
 function validateSpecialCharacters(input) {
     var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
     return format.test(input) ? true : false;
 }
 
+//Main Validatot function
 function validate(input, container) {
     if(!(container == 'password' || container == 'reentered' || container == 'address' || container == 'phone')) {
         if(validateSpecialCharacters(input.value)) {
@@ -126,10 +131,12 @@ function validate(input, container) {
     
 }
 
+// Fields are empty validator
 function emptyChecker(Element) {
     return Element.value === '' ? true : false;
 }
 
+//Two fileds are identical validator
 function isMatch(first, second) {
     return first == second ? true : false;
 }

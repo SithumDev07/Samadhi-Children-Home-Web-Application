@@ -3,12 +3,12 @@
 ## Languages and frameworks used - 
 
 ### Languages -
-#### HTML
-#### CSS
-#### JavaScript
-#### PHP
+###### HTML
+###### CSS
+###### JavaScript
+###### PHP
 #### MySQL
 
 ### Frameworks - 
-#### Tailwindcss
-#### Charts.js
+###### Tailwindcss
+###### Charts.js

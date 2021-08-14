@@ -49,7 +49,9 @@ if (isset($_POST['submit'])) {
 
                     mysqli_stmt_bind_param($statement, "ssiss", $username, $fullname, $phone, $address, $hashPass);
                     mysqli_stmt_execute($statement);
-
+                    session_start();
+                    $_SESSION['sessionId'] = 1;
+                    $_SESSION['sessionUser'] = $username;
                     header("Location: ../index.php?success=registered");
                     exit();
                 }
