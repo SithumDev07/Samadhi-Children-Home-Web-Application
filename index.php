@@ -195,6 +195,7 @@ if (!isset($_SESSION['sessionId'])) {
                             <h2>Labours</h2>
                             <h3>
                             <?php 
+
                                 $sql = "SELECT COUNT(id) FROM labors;";
                                 $results = mysqli_query($conn, $sql);
                                 $resultCheck = mysqli_num_rows($results);
@@ -1126,48 +1127,58 @@ if (!isset($_SESSION['sessionId'])) {
         });
     </script>
     <?php 
-        
-$sql = " SELECT SUM(amount) FROM donars WHERE date BETWEEN '2021-07-31' AND '2021-09-01';";
-$results = mysqli_query($conn, $sql);
-$resultCheck = mysqli_num_rows($results);
-$August;
 
-if($resultCheck > 0) {
-    while($row = mysqli_fetch_assoc($results)) {
-        $August = $row['SUM(amount)'];
+function DonationEachMonth($startDate, $endDate, $conn) {
+    $sql = "SELECT SUM(amount) FROM donars WHERE date BETWEEN '$startDate' AND '$endDate';";
+    $results = mysqli_query($conn, $sql);
+    $resultCheck = mysqli_num_rows($results);
+    if($resultCheck > 0) {
+        while($row = mysqli_fetch_assoc($results)) {
+            return $row['SUM(amount)'];
+            // return $sql;
+        }
+    
     }
 
+    // return $sql;
 }
 
-        
-$sql = " SELECT SUM(amount) FROM donars WHERE date BETWEEN '2021-05-31' AND '2021-07-01';";
-$results = mysqli_query($conn, $sql);
-$resultCheck = mysqli_num_rows($results);
-$June;
+$January = DonationEachMonth('2020-12-31', '2021-02-01', $conn);
+$February = DonationEachMonth('2020-01-31', '2021-03-01', $conn);
+$March = DonationEachMonth('2020-02-28', '2021-04-01', $conn);
+$April = DonationEachMonth('2020-03-31', '2021-05-01', $conn);
+$May = DonationEachMonth('2020-04-30', '2021-06-01', $conn);
+$June = DonationEachMonth('2021-05-31', '2021-07-01', $conn);
+$July = DonationEachMonth('2021-06-30', '2021-08-01', $conn);
+$August = DonationEachMonth('2021-07-31', '2021-09-01', $conn);
+$September = DonationEachMonth('2021-08-31', '2021-10-01', $conn);
+$October = DonationEachMonth('2021-09-30', '2021-11-01', $conn);
+$November = DonationEachMonth('2021-10-30', '2021-12-01', $conn);
+$December = DonationEachMonth('2021-11-31', '2022-01-01', $conn);
 
-if($resultCheck > 0) {
-    while($row = mysqli_fetch_assoc($results)) {
-        $June = $row['SUM(amount)'];
-    }
-
-}
     ?>
     <script>
                 var ctx = document.getElementById('myChart').getContext('2d');
                 var myChart = new Chart(ctx, {
                     type: 'bar',
                     data: {
-                        labels: ['January', 'February', 'April', 'May', 'June', 'July'],
+                        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
                         datasets: [{
                             label: 'Donations Monthly Wise',
-                            data: [<?php echo $August; ?>, <?php echo $June; ?>, <?php echo $June; ?>, <?php echo $August; ?>, <?php echo $August; ?>, <?php echo $August; ?>],
+                            data: [<?php echo $January; ?>, <?php echo $February; ?>, <?php echo $March; ?>, <?php echo $April; ?>, <?php echo $May; ?>, <?php echo $June; ?>, <?php echo $July; ?>, <?php echo $August; ?>, <?php echo $September; ?>, <?php echo $October; ?>, <?php echo $November; ?>, <?php echo $December; ?>],
                             backgroundColor: [
                                 'rgba(255, 99, 132, 0.5)',
                                 'rgba(54, 162, 235, 0.5)',
                                 'rgba(255, 206, 86, 0.5)',
                                 'rgba(75, 192, 192, 0.5)',
                                 'rgba(153, 102, 255, 0.5)',
-                                'rgba(255, 159, 64, 0.5)'
+                                'rgba(255, 159, 64, 0.5)',
+                                'rgba(255, 159, 64, 0.5)',
+                                'rgba(255, 159, 64, 0.5)',
+                                'rgba(255, 159, 64, 0.5)',
+                                'rgba(255, 159, 64, 0.5)',
+                                'rgba(255, 159, 64, 0.5)',
+                                'rgba(255, 159, 64, 0.5)',
                             ],
                             borderColor: [
                                 'rgba(255, 99, 132, 1)',
@@ -1175,7 +1186,13 @@ if($resultCheck > 0) {
                                 'rgba(255, 206, 86, 1)',
                                 'rgba(75, 192, 192, 1)',
                                 'rgba(153, 102, 255, 1)',
-                                'rgba(255, 159, 64, 1)'
+                                'rgba(255, 159, 64, 1)',
+                                'rgba(255, 159, 64, 1)',
+                                'rgba(255, 159, 64, 1)',
+                                'rgba(255, 159, 64, 1)',
+                                'rgba(255, 159, 64, 1)',
+                                'rgba(255, 159, 64, 1)',
+                                'rgba(255, 159, 64, 1)',
                             ],
                             borderWidth: 1
                         }]
