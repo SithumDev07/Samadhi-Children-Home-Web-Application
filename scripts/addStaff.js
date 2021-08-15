@@ -36,9 +36,11 @@ var newDate = currentDate.replace(date.getFullYear(), maximumDate);
 
 if(staffBirthday !== null) {
     // console.log('Working');
-    staffBirthday.value = newDate;
-    staffBirthday.setAttribute("min", currentDate.replace(date.getFullYear(), minimumDate));
-    staffBirthday.setAttribute("max", currentDate);
+    if(staffBirthday.value === '') {
+        staffBirthday.value = newDate;
+        staffBirthday.setAttribute("min", currentDate.replace(date.getFullYear(), minimumDate));
+        staffBirthday.setAttribute("max", currentDate);
+    }
 }
 
 if(staffFirstName !== null && staffLastName !== null && staffNameWithInitials !== null && staffAddress !== null && staffEmail !== null) {
@@ -81,6 +83,13 @@ function checkStaffInputs() {
 
 
     // console.log(childImage.files.length);
+
+    if(staffInsert.name !== 'update') {
+        if(staffImage.files.length === 0) {
+            alert('Please choose an image');
+            success = false;
+        }
+       }
 
     if(staffImage.files.length !== 0) {
         if(!isValidExtention(staffImage)) {

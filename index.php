@@ -502,6 +502,14 @@ if (!isset($_SESSION['sessionId'])) {
                         </div>
                     </div>
 
+                    <?php 
+                        $sql = "SELECT * FROM staff;";
+                        $results = mysqli_query($conn, $sql);
+                        $resultCheck = mysqli_num_rows($results);
+
+                        if($resultCheck > 0) {
+                    ?>
+
                     <table class="rounded-t-lg w-full bg-gray-200 text-gray-800 table-auto">
                         <tr class="text-left border-b-2 border-gray-300">
                             <th class="px-4 py-3">NO</th>
@@ -514,11 +522,7 @@ if (!isset($_SESSION['sessionId'])) {
 
                         <?php
 
-                                $sql = "SELECT * FROM staff;";
-                                $results = mysqli_query($conn, $sql);
-                                $resultCheck = mysqli_num_rows($results);
-
-                                if($resultCheck > 0) {
+                                
                                     while($row = mysqli_fetch_assoc($results)) {
                                 ?>
 
@@ -545,7 +549,7 @@ if (!isset($_SESSION['sessionId'])) {
                                         echo $address;
                                     ?></td>
                                 <td class="px-4 py-3">
-                                <a href="" class="flex items-center text-green-500">
+                                <a href="./index.php?edit_staff&id=<?php echo $row['id']; ?>" class="flex items-center text-green-500">
                                     Edit
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
@@ -553,7 +557,7 @@ if (!isset($_SESSION['sessionId'])) {
                                 </a>
                             </td>
                             <td class="px-4 py-3">
-                                <a href="" class="flex items-center text-red-500">
+                                <a href="./operations/staff-delete.php?id=<?php echo $row['id']; ?>" class="flex items-center text-red-500">
                                     Delete
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
@@ -564,14 +568,25 @@ if (!isset($_SESSION['sessionId'])) {
 
                                 <?php
                                     }
-                                }
+                                
 
 
                                 ?>
 
                     </table>
                 <?php
-                } else if (isset($_GET['view_children'])) {
+                } else {
+
+                    ?>
+                    <h1 class="text-4xl font-semibold text-gray-400 text-center">No results found</h1>
+
+                    <?php
+
+
+                }
+            
+            
+            } else if (isset($_GET['view_children'])) {
                     ?>
     
                         <p class="text-lg text-left font-bold m-5 mt-16">Children</p>
@@ -855,13 +870,13 @@ if (!isset($_SESSION['sessionId'])) {
 
                                                                 $sql = "SELECT * FROM children WHERE id=" . $_GET['id'] . ";";
                                                     
-                                                    $results = mysqli_query($conn, $sql);
-                                                    $resultCheck = mysqli_num_rows($results);
-                        
-                                                    if($resultCheck > 0) {
-                                                        while($row = $row = mysqli_fetch_assoc($results)) {
-                                                    ?>
+                                                                $results = mysqli_query($conn, $sql);
+                                                                $resultCheck = mysqli_num_rows($results);
+                                    
+                                                                if($resultCheck > 0) {
+                                                                    while($row = $row = mysqli_fetch_assoc($results)) {
                                                                 ?>
+                                                                
                                                 
                                                                     <div class="mt-16">
                                                                         <div class="header max-width-form mx-auto h-20 bg-gray-200">
@@ -925,6 +940,97 @@ if (!isset($_SESSION['sessionId'])) {
 
                                                     <?php
                                                 }
+                                            } else if (isset($_GET['edit_staff'])) {
+                                                $sql = "SELECT * FROM staff WHERE id=" . $_GET['id'] . ";";
+                                                    
+                                                $results = mysqli_query($conn, $sql);
+                                                $resultCheck = mysqli_num_rows($results);
+                    
+                                                if($resultCheck > 0) {
+                                                    while($row = $row = mysqli_fetch_assoc($results)) {
+
+                                                ?>
+                                
+                                                    <div class="mt-16">
+                                                        <div class="header max-width-form mx-auto h-20 bg-gray-200">
+                                                            <h1 class="font-semibold">Edit Staff</h1>
+                                                        </div>
+                                                        <form class="max-width-form mx-auto border" action="./operations/staff-edit.php?prev_file=<?php echo $row['image'] ?>" method="POST" enctype="multipart/form-data">
+                                                            <div class="firstname content">
+                                                                <label for="firstname" class="label-align">First Name</label>
+                                                                <input class='border' type="text" name="firstname" placeholder="First Name" id="staffFirstname" value="<?php echo $row['firstname'] ?>">
+                                                            </div>
+                                                            <div class="lastname content">
+                                                                <label for="lastname" class="label-align">Last Name</label>
+                                                                <input class='border' type="text" name="lastname" placeholder="Last Name" id="staffLastname" value="<?php echo $row['lastname'] ?>">
+                                                            </div>
+                                                            <div class="name content">
+                                                                <label for="Name" class="label-align">Name with initials</label>
+                                                                <input class='border' type="text" name="Namewithinitials" placeholder="Enter Name With Initials" id="staffInitials" value="<?php echo $row['initialsname'] ?>">
+                                                            </div>
+                                                            <div class="birthday content">
+                                                                <label for="birthday" class="label-align">Birthday</label>
+                                                                <input class='border' type="date" name="birthday" id="staffBirthday" value="<?php echo $row['birthday'] ?>">
+                                                            </div>
+                                                            <div class="NIC content">
+                                                                <label for="NIC" class="label-align">NIC Number</label>
+                                                                <input class='border' type="number" name="NIC" placeholder="Enter NIC Number" maxlength="12" id="staffNIC" value="<?php echo $row['nicnumber'] ?>">
+                                                            </div>
+                                                            <div class="gender-wrapper content">
+                                                                <label for="gender" name="gender" class="gender label-align">Gender</label>
+                                                                <select id="staffGender" name="gender" class="genderSelect">
+                                                                    <option value="male" <?php if($row['gender'] == 'male') { echo "selected='selected'"; } ?>>Male</option>
+                                                                    <option value="female" <?php if($row['gender'] == 'female') { echo "selected='selected'"; } ?>>Female</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="ContactNumber content">
+                                                                <label for="ContactNumber" class="label-align">Contact Number</label>
+                                                                <input class='border' type="number" name="ContactNumber" placeholder="Enter Contact Number" maxlength="10" id="staffContact" value="<?php echo '0' . $row['phone'] ?>">
+                                                            </div>
+                                                            <div class="PermanentAddress content">
+                                                                <label for="PermanentAddress" class="label-align">Permanent Address</label>
+                                                                <textarea class="border" name="address" id="staffAddress"><?php echo $row['address'] ?></textarea>
+                                                            </div>
+                                                            <div class="Email content">
+                                                                <label for="Email" class="label-align">Email Address</label>
+                                                                <input class='border' type="email" name="Email" placeholder="Enter Email Address" id="staffEmail" value="<?php echo $row['email'] ?>">
+                                                            </div>
+                                                            <div class="POST content">
+                                                                <label for="post" class="label-align">POST</label>
+                                                                <select id="staffPost" name="post" class="postSelect">
+                                                                    <option value="admin" <?php if($row['post'] == 'admin') { echo "selected='selected'"; } ?>>Admin</option>
+                                                                    <option value="principal" <?php if($row['post'] == 'principal') { echo "selected='selected'"; } ?>>Principal</option>
+                                                                    <option value="matron" <?php if($row['post'] == 'matron') { echo "selected='selected'"; } ?>>Matron</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="Image content">
+                                                                <label for="Image" class="label-align">Upload Image</label>
+                                                                <input class='border' type="file" name="Image" placeholder="Choose File" id="staffImage">
+                                                            </div>
+                                                            <input value="<?php echo $_GET['id']; ?>" class="hidden" name="id" />
+                                                            <input type="submit" name="update" value="Update" class="content" id="staffInsert">
+                                
+                                                        </form>
+                                                    </div>
+                                
+                                                <?php
+                                                    }
+                                                } else {
+                                                    ?>
+
+                                                    <div class="w-full items-center flex justify-center h-full flex-col">
+                                                            <h1 class="text-center text-gray-400 text-4xl font-semibold tracking-widest">4o4 Not Found</h1>
+                                                            <a href="./index.php?view_staff" class="text-center font-bold text-blue-500 flex items-center">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18" />
+                                                            </svg>
+                                                                Back to Staff
+                                                            </a">
+                                                    </div>
+
+                                                    <?php
+                                                }
+                                            
                                             }
                 ?>
             </div>
