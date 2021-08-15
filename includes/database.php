@@ -9,5 +9,7 @@ $dbName = "samadhi_test";
 $conn = mysqli_connect($dbHost, $dbUser, $dbPass, $dbName);
 
 if (!$conn) {
-    die('Database connection failed');
+    // die('Database connection failed');
+    header("Location: ./page-not-found.php");
+    exit();
 }

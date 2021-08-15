@@ -44,7 +44,7 @@ if (!isset($_SESSION['sessionId'])) {
                     <a href="/" class="text-3xl text-gray-200 fonst font-semibold">Samadhi Children Home</a>
                 </div>
                 <ul class="links flex items-center">
-                    <li><a href="./register.php" class="text-blue-200 text-sm">
+                    <li><a href="" class="text-blue-200 text-base">
                             <?php
                             if (!isset($_SESSION['sessionId'])) {
                             ?>
