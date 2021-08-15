@@ -180,17 +180,6 @@ function validateForms(input, container) {
             input.classList.add('border-gray-400')
         }
     } else {
-        // var regEmail=/^([a-zA-Z0-9\._]+)@([a-zA-Z0-9])+.([a-z]+)(.[a-z]+)?$/;
-        // if(!regEmail.test(input.value)){
-        //     input.classList.remove('border-gray-400')
-        //     input.classList.remove('border-green-500')
-        //     input.classList.add('border-red-500')
-        //     console.log('invalid email');
-        // } else {
-        //     input.classList.remove('border-red-500')
-        //     input.classList.add('border-green-500')
-        //     console.log('Valid email');
-        // }
 
         if(isValidEmail(input)) {
             input.classList.remove('border-red-500')

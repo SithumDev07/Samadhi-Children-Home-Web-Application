@@ -22,9 +22,9 @@ if (isset($_POST['insert'])) {
 
     $allowed = array('jpg', 'jpeg', 'png', 'pdf');
 
-    print_r($file);
+    // print_r($file);
     // print_r($nameWithInitials);
-    echo $nameWithInitials . $fullName . $birthDay . $gender;
+    // echo $nameWithInitials . $fullName . $birthDay . $gender;
 
     if (in_array($fileActualExt, $allowed)) {
         if ($fileError === 0) {
