@@ -22,9 +22,11 @@ var newDate = currentDate.replace(date.getFullYear(), maximumDate);
 
 
 if(birthday !== null) {
+    if(birthday.value === '') {
     birthday.value = newDate;
     birthday.setAttribute("min", currentDate.replace(date.getFullYear(), minimumDate));
     birthday.setAttribute("max", currentDate);
+    }
 }
 
 if(initialName !== null && fullName !== null) {
@@ -66,6 +68,16 @@ function checkChildInputs() {
 
     // console.log(childImage.files.length);
 
+
+   if(insertChild.name !== 'update') {
+    if(childImage.files.length === 0) {
+        alert('Please choose an image');
+        success = false;
+    }
+   }
+    
+    
+    
     if(childImage.files.length !== 0) {
         if(!isValidExtention(childImage)) {
             success = false;

@@ -631,7 +631,7 @@ if (!isset($_SESSION['sessionId'])) {
                                             echo $age;
                                         ?></td>
                                     <td class="px-4 py-3">
-                                    <a href="" class="flex items-center text-green-500">
+                                    <a href="./index.php?edit_child&id=<?php echo $row['id']; ?>" class="flex items-center text-green-500">
                                         Edit
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
@@ -845,13 +845,87 @@ if (!isset($_SESSION['sessionId'])) {
                                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18" />
                                                             </svg>
                                                                 Back to Labors
-                                                            </a href="./index.php?overview">
+                                                            </a>
                                                     </div>
 
                                                     <?php
 
                                                                 }                
-                                                            }
+                                                            } else if (isset($_GET['edit_child'])) {
+
+                                                                $sql = "SELECT * FROM children WHERE id=" . $_GET['id'] . ";";
+                                                    
+                                                    $results = mysqli_query($conn, $sql);
+                                                    $resultCheck = mysqli_num_rows($results);
+                        
+                                                    if($resultCheck > 0) {
+                                                        while($row = $row = mysqli_fetch_assoc($results)) {
+                                                    ?>
+                                                                ?>
+                                                
+                                                                    <div class="mt-16">
+                                                                        <div class="header max-width-form mx-auto h-20 bg-gray-200">
+                                                                            <h1 class="font-semibold">Edit Child</h1>
+                                                                        </div>
+                                                
+                                                                        <!-- <form onsubmit="return validate(this);"> -->
+                                                                        <form class="max-width-form mx-auto border" action="./operations/child-edit.php?prev_file=<?php echo $row['photo'] ?>" method="POST" enctype="multipart/form-data">
+                                                                            <div class="name content">
+                                                                                <label for="Name" class="label-align">Name with initials</label>
+                                                                                <input type="text" name="Name" placeholder="Enter Name With Initials (Ex: B A S D Basnayake)" id="InitialName" class="select initials-wrapper border" value="<?php echo $row['name_with_initials'] ?>">
+                                                                            </div>
+                                                                            <div class="fullName content">
+                                                                                <label for="fullName" class="label-align">Full Name</label>
+                                                                                <input type="text" name="fullName" placeholder="Enter Full Name" id="fullName" class="fullname-wrapper border" value="<?php echo $row['full_name'] ?>">
+                                                                            </div>
+                                                                            <div class="birthday content">
+                                                                                <label for="birthday" class="label-align">Birthday</label>
+                                                                                <input type="date" name="birthday" id="birthdate" value="<?php echo $row['birthday'] ?>">
+                                                                            </div>
+                                                
+                                                                            <div class="gender-wrapper content">
+                                                                                <label for="gender" name="gender" class="gender label-align">Gender</label>
+                                                                                <div class="radio-wrapper">
+                                                                                    <div class="male mr-3">
+                                                                                        <input type="radio" name="gender" value="male" <?php if($row['gender'] == 'male') { echo "checked='checked'"; } ?>>
+                                                                                        <label for="gender" name="gender">Male</label>
+                                                                                    </div>
+                                                                                    <div class="female">
+                                                                                        <input type="radio" name="gender" value="female" <?php if($row['gender'] == 'female') { echo "checked='checked'"; } ?>>
+                                                                                        <label for="gender" name="gender">Female</label>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="Image content">
+                                                                                <label for="Image" class="label-align">Upload Image</label>
+                                                                                <input type="file" name="Image" placeholder="Choose File" id="insertChildImage">
+                                                                            </div>
+                                                                            <!-- <input type="submit" name="insert" value="Insert" class="content" id="submit"> -->
+                                                                            <input value="<?php echo $_GET['id']; ?>" class="hidden" name="id" />
+                                                                            <input name="update" value="Update" class="content" id="submitChild" type="submit">
+                                                                            <!-- <input type="submit" name="insert" value="Insert" class="content"> -->
+                                                
+                                                                        </form>
+                                                                    </div>
+                                                
+                                                                <?php
+                                                    }
+                                                } else {
+                                                    ?>
+
+                                                    <div class="w-full items-center flex justify-center h-full flex-col">
+                                                            <h1 class="text-center text-gray-400 text-4xl font-semibold tracking-widest">4o4 Not Found</h1>
+                                                            <a href="./index.php?view_children" class="text-center font-bold text-blue-500 flex items-center">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18" />
+                                                            </svg>
+                                                                Back to Children
+                                                            </a">
+                                                    </div>
+
+                                                    <?php
+                                                }
+                                            }
                 ?>
             </div>
         </section>
