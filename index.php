@@ -27,6 +27,13 @@ if (!isset($_SESSION['sessionId'])) {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.0/dist/chart.min.js"></script>
+    <style>
+        canvas {
+            width: auto !important;
+            height: 350px !important;
+        }
+    </style>
 </head>
 
 <body>
@@ -118,37 +125,89 @@ if (!isset($_SESSION['sessionId'])) {
                         <h1 class="text-2xl font-semibold text-gray-700">Overview</h1>
                     </header>
                     <div class="cards flex flex-wrap">
-                        <div class="card text-gray-200 p-5 rounded-md bg-white shadow-xl mr-8">
+                        <a href="./index.php?view_donars" class=" w-48 text-blue-400 p-5 rounded-md bg-white shadow-xl mr-8">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-14 w-14" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
                             </svg>
                             <h2>Total Donations</h2>
-                            <h3>Rs. 104, 500.00</h3>
-                        </div>
+                            <h3>
+                            <?php 
+                                $sql = "SELECT SUM(amount) FROM donars;";
+                                $results = mysqli_query($conn, $sql);
+                                $resultCheck = mysqli_num_rows($results);
+    
+                                if($resultCheck > 0) {
+                                    while($row = mysqli_fetch_assoc($results)) {
+                                        $total = $row['SUM(amount)'];
+                                        echo 'Rs. ' . number_format($total, 2, '.', ',');
+                                    }
+                                }
+                            ?>
+                            </h3>
+                        </a>
 
-                        <div class="card text-gray-200 p-5 rounded-md bg-white shadow-xl mr-8">
+                        <a href="./index.php?view_children" class=" w-48 text-yellow-500 p-5 rounded-md bg-white shadow-xl mr-8">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-14 w-14" viewBox="0 0 20 20" fill="currentColor">
                                 <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z" />
                             </svg>
                             <h2>Total Children</h2>
-                            <h3>8</h3>
-                        </div>
+                            <h3>
+                            <?php 
+                                $sql = "SELECT COUNT(id) FROM children;";
+                                $results = mysqli_query($conn, $sql);
+                                $resultCheck = mysqli_num_rows($results);
+    
+                                if($resultCheck > 0) {
+                                    while($row = mysqli_fetch_assoc($results)) {
+                                        $total = $row['COUNT(id)'];
+                                        echo $total;
+                                    }
+                                }
+                            ?>
+                            </h3>
+                        </a>
 
-                        <div class="card text-gray-200 p-5 rounded-md bg-white shadow-xl mr-8">
+                        <a href="./index.php?view_staff" class=" w-48 text-green-500 p-5 rounded-md bg-white shadow-xl mr-8">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-14 w-14" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                             </svg>
                             <h2>Staff</h2>
-                            <h3>20</h3>
-                        </div>
+                            <h3>
+                            <?php 
+                                $sql = "SELECT COUNT(id) FROM staff;";
+                                $results = mysqli_query($conn, $sql);
+                                $resultCheck = mysqli_num_rows($results);
+    
+                                if($resultCheck > 0) {
+                                    while($row = mysqli_fetch_assoc($results)) {
+                                        $total = $row['COUNT(id)'];
+                                        echo $total;
+                                    }
+                                }
+                            ?>
+                            </h3>
+                        </a>
 
-                        <div class="card text-gray-200 p-5 rounded-md bg-white shadow-xl mr-8">
+                        <a href="./index.php?view_labor" class=" w-48 text-purple-500 p-5 rounded-md bg-white shadow-xl mr-8">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-14 w-14" viewBox="0 0 20 20" fill="currentColor">
                                 <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z" />
                             </svg>
-                            <h2>Staff</h2>
-                            <h3>20</h3>
-                        </div>
+                            <h2>Labours</h2>
+                            <h3>
+                            <?php 
+                                $sql = "SELECT COUNT(id) FROM labors;";
+                                $results = mysqli_query($conn, $sql);
+                                $resultCheck = mysqli_num_rows($results);
+    
+                                if($resultCheck > 0) {
+                                    while($row = mysqli_fetch_assoc($results)) {
+                                        $total = $row['COUNT(id)'];
+                                        echo $total;
+                                    }
+                                }
+                            ?>
+                            </h3>
+                        </a>
                     </div>
 
                     <p class="text-lg text-left font-bold m-5">Cash Donations</p>
@@ -162,7 +221,7 @@ if (!isset($_SESSION['sessionId'])) {
 
                         <?php
 
-                            $sql = "SELECT * FROM donars LIMIT 10;";
+                            $sql = " SELECT * FROM donars ORDER BY id DESC LIMIT 10;";
                             $results = mysqli_query($conn, $sql);
                             $resultCheck = mysqli_num_rows($results);
 
@@ -205,6 +264,8 @@ if (!isset($_SESSION['sessionId'])) {
                     </table>
 
                     <!-- classic design -->
+
+                    <canvas class="mt-10" id="myChart"></canvas>
                 <?php
 
                 } else if (isset($_GET['add_labor'])) {
@@ -1064,6 +1125,72 @@ if (!isset($_SESSION['sessionId'])) {
             Labors.classList.toggle('active-link');
         });
     </script>
+    <?php 
+        
+$sql = " SELECT SUM(amount) FROM donars WHERE date BETWEEN '2021-07-31' AND '2021-09-01';";
+$results = mysqli_query($conn, $sql);
+$resultCheck = mysqli_num_rows($results);
+$August;
+
+if($resultCheck > 0) {
+    while($row = mysqli_fetch_assoc($results)) {
+        $August = $row['SUM(amount)'];
+    }
+
+}
+
+        
+$sql = " SELECT SUM(amount) FROM donars WHERE date BETWEEN '2021-05-31' AND '2021-07-01';";
+$results = mysqli_query($conn, $sql);
+$resultCheck = mysqli_num_rows($results);
+$June;
+
+if($resultCheck > 0) {
+    while($row = mysqli_fetch_assoc($results)) {
+        $June = $row['SUM(amount)'];
+    }
+
+}
+    ?>
+    <script>
+                var ctx = document.getElementById('myChart').getContext('2d');
+                var myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['January', 'February', 'April', 'May', 'June', 'July'],
+                        datasets: [{
+                            label: 'Donations Monthly Wise',
+                            data: [<?php echo $August; ?>, <?php echo $June; ?>, <?php echo $June; ?>, <?php echo $August; ?>, <?php echo $August; ?>, <?php echo $August; ?>],
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.5)',
+                                'rgba(54, 162, 235, 0.5)',
+                                'rgba(255, 206, 86, 0.5)',
+                                'rgba(75, 192, 192, 0.5)',
+                                'rgba(153, 102, 255, 0.5)',
+                                'rgba(255, 159, 64, 0.5)'
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+
+                console.log(myChart);
+</script>
 </body>
 
 </html>
