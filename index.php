@@ -1,6 +1,6 @@
 <?php
 session_start();
-// require_once './includes/database.php';
+require_once './includes/database.php';
 require_once './includes/register-inc.php';
 require_once './includes/login-inc.php';
 
@@ -160,28 +160,48 @@ if (!isset($_SESSION['sessionId'])) {
                             <th class="px-4 py-3">Date</th>
                         </tr>
 
-                        <tr class="bg-gray-100 border-b border-gray-200">
-                            <td class="px-4 py-3">Jill</td>
-                            <td class="px-4 py-3">Rs.5800.00</td>
-                            <td class="px-4 py-3">0766108500</td>
-                            <td class="px-4 py-3">2020-04-20</td>
-                        </tr>
-                        <!-- each row -->
-                        <tr class="bg-gray-100 border-b border-gray-200">
-                            <td class="px-4 py-3">Jill</td>
-                            <td class="px-4 py-3">Rs.5800.00</td>
-                            <td class="px-4 py-3">0766108500</td>
-                            <td class="px-4 py-3">2020-04-20</td>
-                        </tr>
-                        <!-- each row -->
-                        <tr class="bg-gray-100 border-b border-gray-200">
-                            <td class="px-4 py-3">Jill</td>
-                            <td class="px-4 py-3">Rs.5800.00</td>
-                            <td class="px-4 py-3">0766108500</td>
-                            <td class="px-4 py-3">2020-04-20</td>
-                        </tr>
-                        <!-- each row -->
+                        <?php
 
+                            $sql = "SELECT * FROM donars LIMIT 10;";
+                            $results = mysqli_query($conn, $sql);
+                            $resultCheck = mysqli_num_rows($results);
+
+                            if($resultCheck > 0) {
+                                while($row = mysqli_fetch_assoc($results)) {
+                        ?>
+
+                        <tr class="bg-gray-100 border-b border-gray-200">
+                            <td class="px-4 py-3"><?php echo $row['donar_name'] ?></td>
+                            <td class="px-4 py-3">
+                                <?php 
+                                    $amount = $row['amount'];
+                                    $amount = 'Rs.'. $amount . '.00';
+                                    echo $amount;
+                                ?></td>
+                            <td class="px-4 py-3">
+                                <?php
+                                    // echo $row['contact_number'];
+                                    $number = $row['contact_number'];
+                                    if(strlen($number) == 9) {
+                                        $number = '0' . $number;
+                                    }
+
+                                    echo $number;
+                                ?></td>
+                            <td class="px-4 py-3">
+                                <?php 
+                                    $date = $row['date'];
+                                    $date = substr($date, 0, 10);
+                                    echo $date;
+                                ?></td>
+                        </tr>
+
+                        <?php
+                                }
+                            }
+
+
+                        ?>
                     </table>
 
                     <!-- classic design -->
