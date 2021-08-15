@@ -90,7 +90,7 @@ if (!isset($_SESSION['sessionId'])) {
                 </a>
                 <ul class="child-menu">
                     <li><a href="./index.php?add_child">Add Child</a></li>
-                    <li><a href="#">View Child</a></li>
+                    <li><a href="./index.php?view_children">View Child</a></li>
                 </ul>
                 <a href="#" id="Labors" class="flex items-center justify-start p-4">
                     <i class="fas fa-male"></i>
@@ -99,7 +99,7 @@ if (!isset($_SESSION['sessionId'])) {
                 </a>
                 <ul class="labors-menu">
                     <li><a href="./index.php?add_labor">Add Labors</a></li>
-                    <li><a href="#">View Labors</a></li>
+                    <li><a href="./index.php?view_labor">View Labors</a></li>
                     <li><a href="#">View Labor Salary</a></li>
                 </ul>
                 <a href="./login.php" class="flex items-center justify-start p-4">
@@ -442,27 +442,48 @@ if (!isset($_SESSION['sessionId'])) {
                             <th class="px-4 py-3">Date</th>
                         </tr>
 
-                        <tr class="bg-gray-100 border-b border-gray-200">
-                            <td class="px-4 py-3">Jill</td>
-                            <td class="px-4 py-3">Rs.5800.00</td>
-                            <td class="px-4 py-3">0766108500</td>
-                            <td class="px-4 py-3">2020-04-20</td>
-                        </tr>
-                        <!-- each row -->
-                        <tr class="bg-gray-100 border-b border-gray-200">
-                            <td class="px-4 py-3">Jill</td>
-                            <td class="px-4 py-3">Rs.5800.00</td>
-                            <td class="px-4 py-3">0766108500</td>
-                            <td class="px-4 py-3">2020-04-20</td>
-                        </tr>
-                        <!-- each row -->
-                        <tr class="bg-gray-100 border-b border-gray-200">
-                            <td class="px-4 py-3">Jill</td>
-                            <td class="px-4 py-3">Rs.5800.00</td>
-                            <td class="px-4 py-3">0766108500</td>
-                            <td class="px-4 py-3">2020-04-20</td>
-                        </tr>
-                        <!-- each row -->
+                        <?php
+
+                                $sql = "SELECT * FROM donars;";
+                                $results = mysqli_query($conn, $sql);
+                                $resultCheck = mysqli_num_rows($results);
+
+                                if($resultCheck > 0) {
+                                    while($row = mysqli_fetch_assoc($results)) {
+                                ?>
+
+                                <tr class="bg-gray-100 border-b border-gray-200">
+                                <td class="px-4 py-3"><?php echo $row['donar_name'] ?></td>
+                                <td class="px-4 py-3">
+                                    <?php 
+                                        $amount = $row['amount'];
+                                        $amount = 'Rs.'. $amount . '.00';
+                                        echo $amount;
+                                    ?></td>
+                                <td class="px-4 py-3">
+                                    <?php
+                                        // echo $row['contact_number'];
+                                        $number = $row['contact_number'];
+                                        if(strlen($number) == 9) {
+                                            $number = '0' . $number;
+                                        }
+
+                                        echo $number;
+                                    ?></td>
+                                <td class="px-4 py-3">
+                                    <?php 
+                                        $date = $row['date'];
+                                        $date = substr($date, 0, 10);
+                                        echo $date;
+                                    ?></td>
+                                </tr>
+
+                                <?php
+                                    }
+                                }
+
+
+                                ?>
 
                     </table>
                 <?php
@@ -491,12 +512,39 @@ if (!isset($_SESSION['sessionId'])) {
                             <th class="px-4 py-3">Delete</th>
                         </tr>
 
-                        <tr class="bg-gray-100 border-b border-gray-200">
-                            <td class="px-4 py-3">01</td>
-                            <td class="px-4 py-3">Jill</td>
-                            <td class="px-4 py-3">0766108500</td>
-                            <td class="px-4 py-3">School Lane, Gampaha</td>
-                            <td class="px-4 py-3">
+                        <?php
+
+                                $sql = "SELECT * FROM staff;";
+                                $results = mysqli_query($conn, $sql);
+                                $resultCheck = mysqli_num_rows($results);
+
+                                if($resultCheck > 0) {
+                                    while($row = mysqli_fetch_assoc($results)) {
+                                ?>
+
+                                <tr class="bg-gray-100 border-b border-gray-200">
+                                <td class="px-4 py-3"><?php echo $row['id'] ?></td>
+                                <td class="px-4 py-3"><?php echo $row['firstname'] ?></td>
+                                <td class="px-4 py-3">
+                                    <?php
+                                        // echo $row['contact_number'];
+                                        $number = $row['phone'];
+                                        if(strlen($number) == 9) {
+                                            $number = '0' . $number;
+                                        }
+
+                                        echo $number;
+                                    ?></td>
+                                <td class="px-4 py-3">
+                                    <?php 
+                                        $address =  $row['address'];
+                                        if(strlen($address) > 20) {
+                                            $address = substr($address, 0, 18);
+                                            $address = $address . '...';
+                                        }
+                                        echo $address;
+                                    ?></td>
+                                <td class="px-4 py-3">
                                 <a href="" class="flex items-center text-green-500">
                                     Edit
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -512,58 +560,298 @@ if (!isset($_SESSION['sessionId'])) {
                                     </svg>
                                 </a>
                             </td>
-                        </tr>
-                        <!-- each row -->
-                        <tr class="bg-gray-100 border-b border-gray-200">
-                            <td class="px-4 py-3">02</td>
-                            <td class="px-4 py-3">Jill</td>
-                            <td class="px-4 py-3">0766108500</td>
-                            <td class="px-4 py-3">School Lane, Gampaha</td>
-                            <td class="px-4 py-3">
-                                <a href="" class="flex items-center text-green-500">
-                                    Edit
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                                    </svg>
-                                </a>
-                            </td>
-                            <td class="px-4 py-3">
-                                <a href="" class="flex items-center text-red-500">
-                                    Delete
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                    </svg>
-                                </a>
-                            </td>
-                        </tr>
-                        <!-- each row -->
-                        <tr class="bg-gray-100 border-b border-gray-200">
-                            <td class="px-4 py-3">03</td>
-                            <td class="px-4 py-3">Jill</td>
-                            <td class="px-4 py-3">0766108500</td>
-                            <td class="px-4 py-3">School Lane, Gampaha</td>
-                            <td class="px-4 py-3">
-                                <a href="" class="flex items-center text-green-500">
-                                    Edit
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                                    </svg>
-                                </a>
-                            </td>
-                            <td class="px-4 py-3">
-                                <a href="" class="flex items-center text-red-500">
-                                    Delete
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                    </svg>
-                                </a>
-                            </td>
-                        </tr>
-                        <!-- each row -->
+                                </tr>
+
+                                <?php
+                                    }
+                                }
+
+
+                                ?>
 
                     </table>
                 <?php
-                }
+                } else if (isset($_GET['view_children'])) {
+                    ?>
+    
+                        <p class="text-lg text-left font-bold m-5 mt-16">Children</p>
+    
+                        <div class="relative mt-3 mb-10 w-11/12 mx-auto">
+                            <input type="search" class="bg-purple-white shadow rounded border-0 p-3 w-full" placeholder="Search by name...">
+                            <div class="absolute pin-r pin-t mt-3 mr-4 text-purple-lighter top-0 right-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                </svg>
+    
+                            </div>
+                        </div>
+
+                        <?php
+                            $sql = "SELECT * FROM children;";
+                            $results = mysqli_query($conn, $sql);
+                            $resultCheck = mysqli_num_rows($results);
+
+                            if($resultCheck > 0) {
+
+                        ?>
+    
+                        <table class="rounded-t-lg w-full bg-gray-200 text-gray-800 table-auto">
+                            <tr class="text-left border-b-2 border-gray-300">
+                                <th class="px-4 py-3">NO</th>
+                                <th class="px-4 py-3">Child Name</th>
+                                <th class="px-4 py-3">Gender</th>
+                                <th class="px-4 py-3">Birth Date</th>
+                                <th class="px-4 py-3">Age</th>
+                                <th class="px-4 py-3">Edit</th>
+                                <th class="px-4 py-3">Delete</th>
+                            </tr>
+    
+                            <?php
+    
+                                    // $sql = "SELECT * FROM children;";
+                                    // $results = mysqli_query($conn, $sql);
+                                    // $resultCheck = mysqli_num_rows($results);
+    
+                                    // if($resultCheck > 0) {
+                                        while($row = mysqli_fetch_assoc($results)) {
+                                    ?>
+    
+                                    <tr class="bg-gray-100 border-b border-gray-200">
+                                    <td class="px-4 py-3"><?php echo $row['id'] ?></td>
+                                    <td class="px-4 py-3"><?php echo $row['full_name'] ?></td>
+                                    <td class="px-4 py-3"><?php echo $row['gender'] ?></td>
+                                    <td class="px-4 py-3"><?php echo $row['birthday'] ?></td>
+                                    <td class="px-4 py-3">
+                                        <?php 
+                                            $birthday =  $row['birthday'];
+                                            $birthday = explode("-", $birthday);
+                                            $age = (date("md", date("U", mktime(0, 0, 0, $birthday[2], $birthday[1], $birthday[0]))) > date("md")
+                                                ? ((date("Y") - $birthday[0]) - 1)
+                                                : (date("Y") - $birthday[0]));
+                                            echo $age;
+                                        ?></td>
+                                    <td class="px-4 py-3">
+                                    <a href="" class="flex items-center text-green-500">
+                                        Edit
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                        </svg>
+                                    </a>
+                                </td>
+                                <td class="px-4 py-3">
+                                    <a href="" class="flex items-center text-red-500">
+                                        Delete
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                        </svg>
+                                    </a>
+                                </td>
+                                    </tr>
+    
+                                    <?php
+                                        }
+                                    
+    
+    
+                                    ?>
+    
+                        </table>
+
+
+
+                    <?php
+                                   }
+                                   else {
+
+?> 
+                                <h1 class="text-4xl font-semibold text-gray-400 text-center">No results found</h1>
+
+<?php
+
+                                   }
+                                } else if (isset($_GET['view_labor'])) {
+                                    ?>
+                    
+                                        <p class="text-lg text-left font-bold m-5 mt-16">Labours</p>
+                    
+                                        <div class="relative mt-3 mb-10 w-11/12 mx-auto">
+                                            <input type="search" class="bg-purple-white shadow rounded border-0 p-3 w-full" placeholder="Search by name...">
+                                            <div class="absolute pin-r pin-t mt-3 mr-4 text-purple-lighter top-0 right-0">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                                </svg>
+                    
+                                            </div>
+                                        </div>
+                
+                                        <?php
+                                            $sql = "SELECT * FROM labors;";
+                                            $results = mysqli_query($conn, $sql);
+                                            $resultCheck = mysqli_num_rows($results);
+                
+                                            if($resultCheck > 0) {
+                
+                                        ?>
+                    
+                                        <table class="rounded-t-lg w-full bg-gray-200 text-gray-800 table-auto">
+                                            <tr class="text-left border-b-2 border-gray-300">
+                                                <th class="px-4 py-3">NO</th>
+                                                <th class="px-4 py-3">Name</th>
+                                                <th class="px-4 py-3">Contact</th>
+                                                <th class="px-4 py-3">Address</th>
+                                                <th class="px-4 py-3">Gender</th>
+                                                <th class="px-4 py-3">Edit</th>
+                                                <th class="px-4 py-3">Delete</th>
+                                            </tr>
+                    
+                                            <?php
+                    
+                                                    // $sql = "SELECT * FROM children;";
+                                                    // $results = mysqli_query($conn, $sql);
+                                                    // $resultCheck = mysqli_num_rows($results);
+                    
+                                                    // if($resultCheck > 0) {
+                                                        while($row = mysqli_fetch_assoc($results)) {
+                                                    ?>
+                    
+                                                    <tr class="bg-gray-100 border-b border-gray-200">
+                                                    <td class="px-4 py-3"><?php echo $row['id'] ?></td>
+                                                    <td class="px-4 py-3"><?php echo $row['firstname'] ?></td>
+                                                    <td class="px-4 py-3">
+                                                        <?php  
+                                                            $number = $row['phone'];
+                                                            if(strlen($number) == 9) {
+                                                                $number = '0' . $number;
+                                                            }
+
+                                                            echo $number;
+                                                        ?></td>
+                                                    <td class="px-4 py-3"><?php echo $row['address'] ?></td>
+                                                    <td class="px-4 py-3"><?php echo $row['gender'] ?></td>
+                                                    <td class="px-4 py-3">
+                                                    <a href="./index.php?edit_labor&id=<?php echo $row['id']; ?>" class="flex items-center text-green-500">
+                                                        Edit
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                                        </svg>
+                                                    </a>
+                                                </td>
+                                                <td class="px-4 py-3">
+                                                    <a href="" class="flex items-center text-red-500">
+                                                        Delete
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                        </svg>
+                                                    </a>
+                                                </td>
+                                                    </tr>
+                    
+                                                    <?php
+                                                        }
+                                                    
+                    
+                    
+                                                    ?>
+                    
+                                        </table>
+                
+                
+                
+                                    <?php
+                                                   }
+                                                   else {
+                
+                ?> 
+                                                <h1 class="text-4xl font-semibold text-gray-400 text-center">No results found</h1>
+                
+                <?php
+                
+                                                   }
+                                                } else if (isset($_GET['edit_labor'])) {
+
+                                                    $sql = "SELECT * FROM labors WHERE id=" . $_GET['id'] . ";";
+                                                    
+                                                    $results = mysqli_query($conn, $sql);
+                                                    $resultCheck = mysqli_num_rows($results);
+                        
+                                                    if($resultCheck > 0) {
+                                                        while($row = $row = mysqli_fetch_assoc($results)) {
+                                                    ?>
+
+                                    
+                                                        <div class="mt-16">
+                                                            <div class="header max-width-form mx-auto h-20 bg-gray-200">
+                                                                <h1 class="font-semibold">Edit Labor</h1>
+                                                            </div>
+                                                            <form class="max-width-form mx-auto border" action="./operations/labour-edit.php" method="POST">
+                                                                <div class="name content">
+                                                                    <label for="Name" class="label-align">Name with initials</label>
+                                                                    <input type="text" name="initials" id="initials" class="border" placeholder="Enter Name With Initials" value="<?php echo $row['initialsname'] ?>">
+                                                                </div>
+                                                                <div class="fullName content">
+                                                                    <label for="fullName" class="label-align">Full Name</label>
+                                                                    <input type="text" name="fullName" id="fullName" class="border" placeholder="Enter Full Name" value="<?php echo $row['fullname'] ?>">
+                                                                </div>
+                                                                <div class="firstname content">
+                                                                    <label for="firstname" class="label-align">First Name</label>
+                                                                    <input type="text" name="firstname" id="firstname" class="border" placeholder="First Name" value="<?php echo $row['firstname'] ?>">
+                                                                </div>
+                                                                <div class="birthday content">
+                                                                    <label for="birthday" class="label-align">Birthday</label>
+                                                                    <input type="date" name="birthday" id="birthday" class="border" placeholder="Enter Full Name" value="<?php echo $row['birthday'] ?>">
+                                                                </div>
+                                                                <div class="gender-wrapper content">
+                                                                    <label for="gender" name="gender" class="gender label-align">Gender</label>
+                                                                    <div class="radio-wrapper">
+                                                                        <div class="male mr-3">
+                                                                            <input type="radio" name="gender" <?php if($row['gender'] == 'male') { echo "checked='checked'"; } ?> value="male">
+                                                                            <label for="gender" name="gender">Male</label>
+                                                                        </div>
+                                                                        <div class="female">
+                                                                            <input type="radio" name="gender" value="female" <?php if($row['gender'] == 'female') { echo "checked='checked'"; } ?>>
+                                                                            <label for="gender" name="gender">Female</label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="ContactNumber content">
+                                                                    <label for="ContactNumber" class="label-align">Contact Number</label>
+                                                                    <input id="ContactNumber" class="border" type="number" name="ContactNumber" placeholder="Enter Contact Number" maxlength="10" value="<?php echo '0' . $row['phone'] ?>">
+                                                                </div>
+                                                                <div class="PermanentAddress content">
+                                                                    <label for="PermanentAddress" class="label-align">Permanent Address</label>
+                                                                    <textarea name="address" id="address" class="border"><?php echo $row['address'] ?></textarea>
+                                                                </div>
+                                                                <div class="Hiring content">
+                                                                    <label for="Hiring" class="label-align">Name of Hiring Company</label>
+                                                                    <select id="Hiring" name="Hiring" class="HiringSelect" id="Hiring">
+                                                                        <option value="Sunshine" <?php if($row['hiring'] == 'Sunshine') { echo "selected='selected'"; } ?>>Sunshine</option>
+                                                                        <option value="Moonlight" <?php if($row['hiring'] == 'Moonlight') { echo "selected='selected'"; } ?>>Moonlight</option>
+                                                                    </select>
+                                                                </div>
+                                                                <input value="<?php echo $_GET['id']; ?>" class="hidden" name="id" />
+                                                                <input type="submit" name="update" value="Update" class="content" id="labourInsert">
+                                    
+                                                            </form>
+                                                        </div>
+                                                    <?php
+                                                               } } else {
+
+                                                    ?>
+
+                                                    <div class="w-full items-center flex justify-center h-full flex-col">
+                                                            <h1 class="text-center text-gray-400 text-4xl font-semibold tracking-widest">4o4 Not Found</h1>
+                                                            <a href="./index.php?view_labor" class="text-center font-bold text-blue-500 flex items-center">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18" />
+                                                            </svg>
+                                                                Back to Labors
+                                                            </a href="./index.php?overview">
+                                                    </div>
+
+                                                    <?php
+
+                                                                }                
+                                                            }
                 ?>
             </div>
         </section>

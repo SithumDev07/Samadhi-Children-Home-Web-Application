@@ -9,10 +9,6 @@ const labourAddress = document.querySelector('#address')
 const labourHiring = document.querySelector('#Hiring')
 const labourInsert = document.querySelector('#labourInsert')
 
-
-// let isFocusedInitials = false;
-// let isFocusedFullName = false;
-
 var date = new Date();
 var currentDate = date.toISOString().substring(0,10);
 //Minimum and maximum Age for employees
@@ -21,13 +17,13 @@ var minimumDate = date.getFullYear() - 18;
 
 var newDate = currentDate.replace(date.getFullYear(), maximumDate);
 
-// console.log(currentDate.replace(date.getFullYear(), minimumDate));
-
 
 if(labourBirthday !== null) {
-    labourBirthday.value = newDate;
-    labourBirthday.setAttribute("min", currentDate.replace(date.getFullYear(), minimumDate));
-    labourBirthday.setAttribute("max", currentDate);
+    if(labourBirthday.value === '') {
+        labourBirthday.value = newDate;
+        labourBirthday.setAttribute("min", currentDate.replace(date.getFullYear(), minimumDate));
+        labourBirthday.setAttribute("max", currentDate);
+    }
 }
 
 if(labourInitialName !== null && labourFullName !== null && labourFirstname !== null) {
