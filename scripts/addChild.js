@@ -109,15 +109,15 @@ function checkChildInputs() {
     
 
     
-    // console.log(success);
-    if(success) {
-        initialName.classList.remove('border-red-500')
-    initialName.classList.remove('border-gray-400')
-    initialName.classList.add('border-green-500')
-    fullName.classList.remove('border-red-500')
-    fullName.classList.remove('border-gray-400')
-    fullName.classList.add('border-green-500')
-    }
+    // // console.log(success);
+    // if(success) {
+    //     initialName.classList.remove('border-red-500')
+    // initialName.classList.remove('border-gray-400')
+    // initialName.classList.add('border-green-500')
+    // fullName.classList.remove('border-red-500')
+    // fullName.classList.remove('border-gray-400')
+    // fullName.classList.add('border-green-500')
+    // }
     return success;
 
 }

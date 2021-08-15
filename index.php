@@ -194,52 +194,52 @@ if (!isset($_SESSION['sessionId'])) {
                         <div class="header max-width-form mx-auto h-20 bg-gray-200">
                             <h1 class="font-semibold">Add Labor</h1>
                         </div>
-                        <form class="max-width-form mx-auto border">
+                        <form class="max-width-form mx-auto border" action="./operations/labour.php" method="POST">
                             <div class="name content">
                                 <label for="Name" class="label-align">Name with initials</label>
-                                <input type="text" name="Name" placeholder="Enter Name With Initials">
+                                <input type="text" name="initials" id="initials" class="border" placeholder="Enter Name With Initials">
                             </div>
                             <div class="fullName content">
                                 <label for="fullName" class="label-align">Full Name</label>
-                                <input type="text" name="fullName" placeholder="Enter Full Name">
+                                <input type="text" name="fullName" id="fullName" class="border" placeholder="Enter Full Name">
                             </div>
                             <div class="firstname content">
                                 <label for="firstname" class="label-align">First Name</label>
-                                <input type="text" name="firstname" placeholder="First Name">
+                                <input type="text" name="firstname" id="firstname" class="border" placeholder="First Name">
                             </div>
                             <div class="birthday content">
                                 <label for="birthday" class="label-align">Birthday</label>
-                                <input type="date" name="birthday" placeholder="Enter Full Name">
+                                <input type="date" name="birthday" id="birthday" class="border" placeholder="Enter Full Name">
                             </div>
                             <div class="gender-wrapper content">
                                 <label for="gender" name="gender" class="gender label-align">Gender</label>
                                 <div class="radio-wrapper">
                                     <div class="male mr-3">
-                                        <input type="radio" name="gender">
+                                        <input type="radio" name="gender" checked="checked" value="male">
                                         <label for="gender" name="gender">Male</label>
                                     </div>
                                     <div class="female">
-                                        <input type="radio" name="gender">
+                                        <input type="radio" name="gender" value="female">
                                         <label for="gender" name="gender">Female</label>
                                     </div>
                                 </div>
                             </div>
                             <div class="ContactNumber content">
                                 <label for="ContactNumber" class="label-align">Contact Number</label>
-                                <input type="number" name="ContactNumber" placeholder="Enter Contact Number" maxlength="10">
+                                <input id="ContactNumber" class="border" type="number" name="ContactNumber" placeholder="Enter Contact Number" maxlength="10">
                             </div>
                             <div class="PermanentAddress content">
                                 <label for="PermanentAddress" class="label-align">Permanent Address</label>
-                                <textarea name="name"></textarea>
+                                <textarea name="address" id="address" class="border"></textarea>
                             </div>
                             <div class="Hiring content">
                                 <label for="Hiring" class="label-align">Name of Hiring Company</label>
-                                <select id="Hiring" name="Hiring" class="HiringSelect">
-                                    <option value="admin">Sunshine</option>
-                                    <option value="principal">Moonlight</option>
+                                <select id="Hiring" name="Hiring" class="HiringSelect" id="Hiring">
+                                    <option value="Sunshine">Sunshine</option>
+                                    <option value="Moonlight">Moonlight</option>
                                 </select>
                             </div>
-                            <input type="submit" name="insert" value="Insert" class="content">
+                            <input type="submit" name="insert" value="Insert" class="content" id="labourInsert">
 
                         </form>
                     </div>
@@ -254,7 +254,7 @@ if (!isset($_SESSION['sessionId'])) {
                         <div class="header max-width-form mx-auto h-20 bg-gray-200">
                             <h1 class="font-semibold">Add Staff</h1>
                         </div>
-                        <form class="max-width-form mx-auto border">
+                        <form class="max-width-form mx-auto border" action="./operations/staff.php" method="POST" enctype="multipart/form-data">
                             <div class="firstname content">
                                 <label for="firstname" class="label-align">First Name</label>
                                 <input class='border' type="text" name="firstname" placeholder="First Name" id="staffFirstname">
@@ -265,7 +265,7 @@ if (!isset($_SESSION['sessionId'])) {
                             </div>
                             <div class="name content">
                                 <label for="Name" class="label-align">Name with initials</label>
-                                <input class='border' type="text" name="Name" placeholder="Enter Name With Initials" id="staffInitials">
+                                <input class='border' type="text" name="Namewithinitials" placeholder="Enter Name With Initials" id="staffInitials">
                             </div>
                             <div class="birthday content">
                                 <label for="birthday" class="label-align">Birthday</label>
@@ -288,7 +288,7 @@ if (!isset($_SESSION['sessionId'])) {
                             </div>
                             <div class="PermanentAddress content">
                                 <label for="PermanentAddress" class="label-align">Permanent Address</label>
-                                <textarea class="border" name="name" id="staffAddress"></textarea>
+                                <textarea class="border" name="address" id="staffAddress"></textarea>
                             </div>
                             <div class="Email content">
                                 <label for="Email" class="label-align">Email Address</label>
@@ -552,6 +552,7 @@ if (!isset($_SESSION['sessionId'])) {
     <script src="./scripts/addChild.js"></script>
     <script src="./scripts/addDonations.js"></script>
     <script src="./scripts/addStaff.js"></script>
+    <script src="./scripts/addLabour.js"></script>
     <script>
         const Donations = document.querySelector('#Donations');
         const Staff = document.querySelector('#Staff');

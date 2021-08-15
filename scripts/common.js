@@ -195,12 +195,12 @@ function validateForms(input, container) {
         if(isValidEmail(input)) {
             input.classList.remove('border-red-500')
             input.classList.add('border-green-500')
-            console.log('Valid email');
+            // console.log('Valid email');
         } else {
             input.classList.remove('border-gray-400')
             input.classList.remove('border-green-500')
             input.classList.add('border-red-500')
-            console.log('invalid email');
+            // console.log('invalid email');
         }
     }
 }

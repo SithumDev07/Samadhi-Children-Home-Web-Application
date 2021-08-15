@@ -35,7 +35,7 @@ var newDate = currentDate.replace(date.getFullYear(), maximumDate);
 
 
 if(staffBirthday !== null) {
-    console.log('Working');
+    // console.log('Working');
     staffBirthday.value = newDate;
     staffBirthday.setAttribute("min", currentDate.replace(date.getFullYear(), minimumDate));
     staffBirthday.setAttribute("max", currentDate);
@@ -59,10 +59,10 @@ if(staffInsert !== null) {
 function returnToPrevious (e) {
     e = e || window.event;
 
-    // if(!checkStaffInputs()) {
+    if(!checkStaffInputs()) {
 
         
-    if(true) {
+    // if(true) {
         if(e.preventDefault) {
             e.preventDefault();
         } else {
@@ -70,7 +70,7 @@ function returnToPrevious (e) {
         }
     }
 
-    console.log("Here I am " ,checkStaffInputs());
+    // console.log("Here I am " ,checkStaffInputs());
     // checkChildInputs()
 
 }
