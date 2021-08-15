@@ -32,7 +32,7 @@ if (isset($_POST['update'])) {
             mysqli_stmt_bind_param($statement, 'sssssissi', $nameWithInitials, $fullname, $firstname, $birthday, $gender, $phone, $address, $hiring, $id);
             mysqli_stmt_execute($statement);
 
-            header("Location: ../index.php?overview");
+            header("Location: ../index.php?view_labor");
             exit();
         }
     }

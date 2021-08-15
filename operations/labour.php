@@ -31,7 +31,7 @@ if (isset($_POST['insert'])) {
             mysqli_stmt_bind_param($statement, 'sssssiss', $nameWithInitials, $fullname, $firstname, $birthday, $gender, $phone, $address, $hiring);
             mysqli_stmt_execute($statement);
 
-            header("Location: ../index.php?overview");
+            header("Location: ../index.php?view_labor");
             exit();
         }
     }

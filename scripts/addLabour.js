@@ -12,8 +12,8 @@ const labourInsert = document.querySelector('#labourInsert')
 var date = new Date();
 var currentDate = date.toISOString().substring(0,10);
 //Minimum and maximum Age for employees
-var maximumDate = date.getFullYear() - 0;
-var minimumDate = date.getFullYear() - 18;
+var maximumDate = date.getFullYear() - 16;
+var minimumDate = date.getFullYear() - 55;
 
 var newDate = currentDate.replace(date.getFullYear(), maximumDate);
 
