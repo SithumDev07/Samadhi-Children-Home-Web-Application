@@ -30,7 +30,7 @@ require_once './includes/register-inc.php';
                 </ul>
             </div>
         </nav>
-        <div class="container">
+        <div class="container mx-auto">
             <form action="./includes/register-inc.php" method="POST" class="m-auto w-80 shadow-xl mt-20 bg-white flex flex-col items-center py-5 rounded-md px-3">
                 <div class="input relative px-3 py-3 w-11/12 border rounded-lg border-gray-300 text-sm username-wrapper">
                     <label for="username" class="absolute floating-username">Username</label>
